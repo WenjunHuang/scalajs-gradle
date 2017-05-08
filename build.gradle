@@ -4,15 +4,23 @@ version '0.1'
 apply plugin: 'java'
 apply plugin: 'scala'
 
-
+buildscript {
+    ext.scalaVersion="2.12"
+    ext.scalaRevision="1"
+    ext.scalaFullVersion="$scalaVersion.$scalaRevision"
+    ext.scalaJSVersion="0.6.16"
+}
 repositories {
     maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
-    mavenCentral()
+    maven {url 'http://repox.gtan.com:8078'}
+//    mavenCentral()
 }
 
 dependencies {
-    compile 'org.scala-lang:scala-library:2.12.2'
-    compile 'org.scala-js:scalajs-library_2.12:0.6.16'
+    compile group:'org.scala-lang', name:'scala-library', version: scalaFullVersion
+    compile group: 'org.scala-js', name: 'scalajs-sbt-test-adapter_' + scalaVersion, version: scalaJSVersion
+    compile group: 'org.scala-js', name: 'scalajs-js-envs_' + scalaVersion, version: scalaJSVersion
+    compile group: 'org.scala-js', name: 'scalajs-tools_' + scalaVersion, version: scalaJSVersion
     compile gradleApi()
-    testCompile 'org.scalatest:scalatest_2.12:3.0.3'
+    testCompile group:'org.scalatest',name:"scalatest_2.12",version:'3.0.3'
 }
