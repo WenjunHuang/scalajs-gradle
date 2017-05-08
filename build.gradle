@@ -1,0 +1,18 @@
+group 'com.github.wenjunhuang'
+version '0.1'
+
+apply plugin: 'java'
+apply plugin: 'scala'
+
+
+repositories {
+    maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.12.2'
+    compile 'org.scala-js:scalajs-library_2.12:0.6.16'
+    compile gradleApi()
+    testCompile 'org.scalatest:scalatest_2.12:3.0.3'
+}
