@@ -2,19 +2,32 @@ group 'com.github.wenjunhuang'
 version '0.1'
 
 apply plugin: 'java'
+apply plugin: 'java-gradle-plugin'
 apply plugin: 'scala'
+apply plugin: 'maven-publish'
 
 buildscript {
     ext.scalaVersion="2.12"
     ext.scalaRevision="1"
     ext.scalaFullVersion="$scalaVersion.$scalaRevision"
     ext.scalaJSVersion="0.6.16"
+
+    repositories {
+        maven { url 'http://192.168.2.247:8081/repository/PlatformMaven/' }
+    }
 }
 repositories {
-    maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
-    maven {url 'http://repox.gtan.com:8078'}
-//    mavenCentral()
+    maven { url 'http://192.168.2.247:8081/repository/PlatformMaven/' }
 }
+
+//gradlePlugin {
+//    plugins {
+//        scalaFrontend {
+//            id = "com.github.wenjunhuang.scalafrontend"
+//            implementationClass = "com.github.wenjunhuang.scalafrontend.FrontendPlugin"
+//        }
+//    }
+//}
 
 dependencies {
     compile group:'org.scala-lang', name:'scala-library', version: scalaFullVersion
@@ -22,5 +35,9 @@ dependencies {
     compile group: 'org.scala-js', name: 'scalajs-js-envs_' + scalaVersion, version: scalaJSVersion
     compile group: 'org.scala-js', name: 'scalajs-tools_' + scalaVersion, version: scalaJSVersion
     compile gradleApi()
+    compile localGroovy()
+
+    testCompile gradleTestKit()
+    testCompile group:'junit',name:'junit',version:'4.12'
     testCompile group:'org.scalatest',name:"scalatest_2.12",version:'3.0.3'
 }

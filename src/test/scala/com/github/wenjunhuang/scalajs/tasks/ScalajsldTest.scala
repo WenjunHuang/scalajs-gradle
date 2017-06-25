@@ -11,7 +11,7 @@ class ScalajsldTest extends FlatSpec with Matchers{
   "createFrontendConfig" should "set checkIR property" in {
     val scalajsld = Scalajsld
     val expected = true
-    scalajsld.options = Options().withCheckIR(expected)
+    scalajsld.options = ScalaOptions().withCheckIR(expected)
 
     val result = scalajsld.createFrontendConfig
 
@@ -21,7 +21,7 @@ class ScalajsldTest extends FlatSpec with Matchers{
   "createBackendConfig" should "set correct properties" in {
     val relativizeSourceMap = Some(new URI("http://foo.com"))
     val prettyPrint = true
-    Scalajsld.options = Options().withRelativizeSourceMap(relativizeSourceMap).withPrettyPrint(prettyPrint)
+    Scalajsld.options = ScalaOptions().withRelativizeSourceMap(relativizeSourceMap).withPrettyPrint(prettyPrint)
 
     val result = Scalajsld.createBackendConfig
 
